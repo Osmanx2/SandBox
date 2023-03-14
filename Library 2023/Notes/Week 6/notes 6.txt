@@ -1,0 +1,15 @@
+
+
+URL construct
+https://www.google.com/search?q=url+constructor&sxsrf=AJOqlzULsw-3cyX_pnGIdwAlIg49lH-5TQ:1678725579910&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi1nPaOrNn9AhUgVvEDHUofC3MQ_AUoAXoECAEQAw&biw=1920&bih=944&dpr=1#imgrc=BSWxq24EZTe-vM
+
+
+
+Once on React app folder if receive no connection err
+run 
+- npm config rm proxy
+- npm config rm https-proxy
+
+
+When in FrontEnd->ReactApp->library-front-end forlder
+execute: npm i

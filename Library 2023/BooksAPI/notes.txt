@@ -1,0 +1,83 @@
+Will be nodejs api 
+
+https://blog.logrocket.com/nodejs-expressjs-postgresql-crud-rest-api-example/
+https://www.thisdot.co/blog/connecting-to-postgresql-with-node-js
+https://node-postgres.com/guides/async-express
+https://ishan02016.medium.com/creating-your-api-with-node-express-and-postgres-a50eb47451a2
+https://expressjs.com/en/guide/using-middleware.html
+
+
+Packages to install
+npm init
+npm i express
+npm i pg
+npm i express-promise-router --save
+npm i -g nodemon
+npm i dotenv
+npm i express-formidable
+npm i jsonwebtoken
+npm i body-parser
+npm i axios
+
+
+
+
+
+Run dockerize workspace
+
+
+Terminal install rest generator with yo
+npm install -g yo grunt-cli generator-expressjs-api
+yo expressjs-api
+
+
+
+
+
+Also tutorial for react and node + postgresql
+https://www.bezkoder.com/react-node-express-postgresql/
+
+CREATE EXTENSION pgcrypto;
+SELECT gen_random_uuid();
+
+CREATE TABLE books (
+    id VARCHAR(40) PRIMARY KEY not null default gen_random_uuid(),
+	date_created  timestamp not null,
+	created_by VARCHAR(64) not null,
+	publiser VARCHAR(512) null,
+	date_issued  timestamp not null,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(5120) not null,
+	cover_id VARCHAR(64),
+    cost NUMERIC(5,2)
+);
+
+
+CREATE TABLE authors (
+    id VARCHAR(40) PRIMARY KEY not null default gen_random_uuid(),
+    created_date timestamp not null,
+    created_by VARCHAR(32) not null,
+	date_of_birth timestamp not null,
+    name VARCHAR(255) NOT NULL,
+    middle_name VARCHAR(255) NULL,
+	avatar_id VARCHAR(64),
+    surname VARCHAR(255) NOT null
+);
+
+
+CREATE TABLE books_authors (
+    id VARCHAR(40) PRIMARY KEY not null default gen_random_uuid(),
+    author_id VARCHAR(255) NOT NULL,
+    book_id VARCHAR(255) NOT NULL
+);
+
+
+ALTER TABLE books_authors
+ADD CONSTRAINT books_authors_author_fk FOREIGN KEY (author_id) REFERENCES authors(id);
+ALTER TABLE books_authors
+ADD CONSTRAINT books_authors_book_fk FOREIGN KEY (book_id) REFERENCES books(id);
+
+
+drop table books_authors;
+drop table authors;
+drop table books;

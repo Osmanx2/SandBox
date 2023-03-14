@@ -1,0 +1,6 @@
+to create host machine link to docker network 
+execute below
+docker network create -d bridge library
+
+to run dbs command below
+docker-compose -f docker-compose-databases.yml up -d

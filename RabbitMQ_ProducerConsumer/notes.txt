@@ -1,0 +1,4 @@
+docker-compose -f docker-compose.message-broker.yml up -d
+
+go to
+http://localhost:15672/#/

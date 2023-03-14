@@ -1,0 +1,18 @@
+Http status codes
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+
+AuthApi is for validating the token, implementation logic will be with each particular API
+
+HTTP Methods
+https://www.tutorialspoint.com/http/http_methods.htm
+
+
+
+docker-compose commands
+
+docker-compose up -d 
+docker-compose build
+
+Got to AuthAPI folder and run below:
+docker build -t auth-api:latest .
+Also check pack.sh

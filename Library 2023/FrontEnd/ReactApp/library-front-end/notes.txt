@@ -1,0 +1,40 @@
+// React basics and 
+https://reactjs.org/tutorial/tutorial.html
+https://www.w3schools.com/js/js_htmldom.asp
+https://www.pluralsight.com/guides/how-to-use-a-simple-form-submit-with-files-in-react
+
+
+//React 
+npm install -g create-react-app
+
+npx create-react-app library-front-end
+
+npm install
+npm start
+
+
+//Install in react app
+npm i react-helmet
+<Helmet>
+    <script src="/path/to/resource.js" type="text/javascript" />
+</Helmet>
+
+// For routing
+npm install react-router-dom
+
+
+//CORS issue solved with proxy 
+https://www.telerik.com/blogs/dealing-with-cors-in-create-react-app
+
+npm install --save-dev http-proxy-middleware
+npm install morgan 
+
+
+check setup proxy
+
+
+//For styling and other 
+npm i jquery --save
+
+useEffect and useState explained
+https://www.robinwieruch.de/react-hooks-fetch-data/

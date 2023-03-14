@@ -1,0 +1,65 @@
+Comment API Will be JAVA Spring Boot Application
+
+
+// Follow instructions from below
+https://www.javainuse.com/spring/jpa
+
+https://start.spring.io/
+Pick JAVA
+Pick gradle 
+2.6.4 version Spring boot
+Include:
+Spring Web
+Spring Data JPA
+MySQL Driver
+Validation
+
+Jar;Java 11
+
+
+This will be CodeFirst approach
+
+SELECT BIN_TO_UUID(id), book_id, comment, created_at, user_id
+FROM `comments-db`.comments;
+
+
+Configure application.properties
+Create folders model, repository, controllers
+
+//To run application 
+sh gradlew bootRun  
+sh gradlew build 
+
+//List tasks 
+sh gradlew tasks 
+
+add application plugin to build.gradle.kts
+and add 
+
+application {
+    // Define the main class for the application.
+    mainClassName = "com.vum.commentsapi.AppKt"
+}
+
+Application tasks
+-----------------
+bootRun - Runs this project as a Spring Boot application.
+
+Build tasks
+-----------
+assemble - Assembles the outputs of this project.
+bootBuildImage - Builds an OCI image of the application using the output of the bootJar task
+bootJar - Assembles an executable jar archive containing the main classes and their dependencies.
+bootJarMainClassName - Resolves the name of the application's main class for the bootJar task.
+bootRunMainClassName - Resolves the name of the application's main class for the bootRun task.
+build - Assembles and tests this project.
+buildDependents - Assembles and tests this project and all projects that depend on it.
+buildKotlinToolingMetadata - Build metadata json file containing information about the used Kotlin tooling
+buildNeeded - Assembles and tests this project and all projects it depends on.
+classes - Assembles main classes.
+clean - Deletes the build directory.
+jar - Assembles a jar archive containing the main classes.
+testClasses - Assembles test classes.
+
+
+Need to remove spaces from folder name as server crashes

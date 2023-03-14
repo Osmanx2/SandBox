@@ -1,0 +1,5 @@
+executed cli commands
+
+dotnet new console  
+
+dotnet add package RabbitMQ.Client

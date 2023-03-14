@@ -1,0 +1,114 @@
+version: '3'
+services:
+  auth-api:
+    image: auth-api:latest
+    container_name: auth-api
+    build:
+      context: ./AuthAPI/bin/Release/net5.0/publish
+      dockerfile: ../../../../Dockerfile quick
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Docker
+    networks:
+      - library
+    ports:
+    - 5001:5001
+  auth-api-mongo:
+    image: mongo:4.4.17
+    container_name: auth-api-db
+    volumes:
+      - /Users/oosman/Desktop/Docker/mongo4.4:/data/db
+    networks:
+      - library
+    ports:
+      - 27017:27017
+  books-api-db:
+    image: postgres:12
+    container_name: books-api-db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - "/Users/oosman/Desktop/Docker/postgres:/var/lib/postgresql/data"
+    ports:
+      - '5433:5432'
+    networks:
+      - library
+  comments-api-db:
+    image: mysql:8.0
+    container_name: comments-api-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=comments-db
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+    volumes:
+      - "/Users/oosman/Desktop/Docker/mysql:/var/lib/mysql"
+    networks:
+      - library
+    ports:
+      - 3306:3306
+  comments-api:
+    image: comments-api:latest
+    container_name: comments-api
+    depends_on:
+      - comments-api-db
+    build:
+      context: ./CommentsAPI
+      dockerfile: Dockerfile
+    environment:
+      - dbURL=jdbc:mysql://comments-api-db:3306/comments-db?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+      - dbUser=mysql
+      - dbPass=mysql
+      - envName=Docker
+    networks:
+      - library
+    ports:
+      - 3010:8080
+  documents-api-db:
+    image: postgres:12
+    container_name: documents-api-db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - "/Users/oosman/Desktop/Docker/postgres-2:/var/lib/postgresql/data"
+    networks:
+      - library
+    ports:
+      - '5432:5432'
+  ratings-api-db:
+    image: postgres:12
+    container_name: ratings-api-db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - "/Users/oosman/Desktop/Docker/postgres-3:/var/lib/postgresql/data"
+    networks:
+      - library
+    ports:
+      - '5434:5432'
+  ratings-api:
+    image: ratings-api
+    container_name: ratings-api
+    depends_on:
+      - ratings-api-db
+    build:
+      context: ./RatingsAPI
+      dockerfile: Dockerfile
+    environment:
+      - envName=Docker
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5434
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=ratings-db
+    networks:
+      - library
+    ports:
+      - 5004:5004
+networks:
+  library: null

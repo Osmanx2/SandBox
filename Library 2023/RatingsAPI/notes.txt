@@ -1,0 +1,51 @@
+Will be golang rest api with postgresql
+
+Guides:
+https://dev.to/pacheco/create-a-restful-api-with-golang-from-scratch-42g2
+https://go.dev/
+https://golangbot.com/structs-instead-of-classes/
+https://gorm.io/docs/
+
+
+// Commands 
+run go mod init ratings-api
+go build
+go run 
+
+
+//Init golang app
+go mod init ratings-api
+//Get library
+go get github.com/gofiber/fiber/v2
+
+//To set gopath to be your folder 
+export GOPATH="/Users/oosman/Google Drive/VUM/Advanced programming/VUM 2022/LibraryApp/RatingsAPI"
+export GO111MODULE="on" 
+
+change go interpreter to 1.17
+
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+
+// Note that gorm will do the migrations and create ratings table 
+CREATE EXTENSION pgcrypto;
+
+CREATE TABLE public.ratings (
+	id varchar(40) NOT NULL DEFAULT gen_random_uuid(),
+	date_created timestamp NOT NULL DEFAULT now(),
+	created_by varchar(128) NOT NULL,
+	book_id varchar(40) NOT NULL,
+	value int not null, 
+	CONSTRAINT ratings_pkey PRIMARY KEY (id)
+);
+
+--drop table public.ratings
+
+
+
+// To fix gopath problem 
+if there is problem with dependancies on mac please just simply uninstall all go versions and make pure install 
+it will be much much easier
+There is also way to build and run in docker with Air for hot reload
+I had some instances even in /usr/local/bin/go

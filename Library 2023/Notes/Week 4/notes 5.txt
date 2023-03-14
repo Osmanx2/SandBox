@@ -1,0 +1,5 @@
+//Document API
+Postman Collection is updated
+
+
+Check notes on DOCUMENTS API

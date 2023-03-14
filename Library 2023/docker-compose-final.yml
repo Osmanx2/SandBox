@@ -1,0 +1,222 @@
+version: '3.9'
+services:
+  auth-api:
+    image: auth-api:latest
+    container_name: auth-api
+    build:
+      context: ./AuthAPI/bin/Release/net5.0/publish
+      dockerfile: ../../../../Dockerfile quick
+    depends_on:
+      - books-api-db
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Docker
+    networks:
+      - osnet
+    ports:
+    - 5001:5001
+  auth-api-mongo:
+    image: mongo:4.4
+    container_name: auth-api-db
+    volumes:
+      - /Users/oosman/Desktop/Docker/mongo:/data/db
+    networks:
+      - osnet
+    ports:
+      - 27017:27017
+  books-api-db:
+    image: postgres:12
+    container_name: books-api-db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - "/Users/oosman/Desktop/Docker/postgres:/var/lib/postgresql/data"
+    networks:
+      - osnet
+    ports:
+      - '5433:5432'
+  books-api:
+    image: books-api:latest
+    container_name: books-api
+    build:
+      context: ./BooksAPI
+      dockerfile: Dockerfile
+    depends_on:
+      - books-api-db
+    restart: always
+    environment:
+      - NODE_ENV=docker
+      - PGHOST=host.docker.internal
+      - PGDATABASE=books
+      - PGPORT=5433
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+      - DocumentsAPIURL=http://documents-api
+    networks:
+      - osnet
+    ports:
+      - 3005:3005
+  comments-api-db:
+    image: mysql:8.0
+    container_name: comments-api-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=comments-db
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+    volumes:
+      - "/Users/oosman/Desktop/Docker/mysql:/var/lib/mysql"
+    networks:
+      - osnet
+    ports:
+      - 3306:3306
+  comments-api:
+    image: comments-api:latest
+    container_name: comments-api
+    depends_on:
+      - comments-api-db
+    build:
+      context: ./CommentsAPI
+      dockerfile: Dockerfile
+    environment:
+      - dbURL=jdbc:mysql://comments-api-db:3306/comments-db?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+      - dbUser=mysql
+      - dbPass=mysql
+      - envName=Docker
+    networks:
+      - osnet
+    ports:
+      - 3010:8080
+  documents-api-db:
+    image: postgres:12
+    container_name: documents-api-db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - "/Users/oosman/Desktop/Docker/postgres-2:/var/lib/postgresql/data"
+    networks:
+      - osnet
+    ports:
+      - '5432:5432'
+  documents-api:
+    image: documentsapi
+    container_name: documents-api
+    build:
+      context: ./DocumentsAPI
+      dockerfile: Dockerfile
+    depends_on:
+      - documents-api-db
+    environment:
+      - PGHOST=documents-api-db
+      - PGDATABASE=files
+      - PGPORT=5432
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+      - env_name=Docker
+    networks:
+      - osnet
+    ports:
+      - 8000:80
+  ratings-api-db:
+    image: postgres:12
+    container_name: ratings-api-db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - "/Users/oosman/Desktop/Docker/postgres-3:/var/lib/postgresql/data"
+    networks:
+      - osnet
+    ports:
+      - '5434:5432'
+  ratings-api:
+    image: ratings-api
+    container_name: ratings-api
+    depends_on:
+      - ratings-api-db
+    build:
+      context: ./RatingsAPI
+      dockerfile: Dockerfile
+    environment:
+      - envName=Docker
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5434
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=ratings-db
+    networks:
+      - osnet
+    ports:
+      - 5004:5004
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./monitoring/prometheus/config:/etc/prometheus/
+      - ./monitoring/prometheus/storage:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    expose:
+      - 9090
+    networks:
+      - osnet
+    ports:
+      - 9090:9090
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    links:
+      - prometheus:prometheus
+    volumes:
+      - ./monitoring/grafana/data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=jimmychanga
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_DOMAIN=oo.com
+      - GF_SMTP_ENABLED=false
+      - GF_SMTP_HOST=smtp.gmail.com:587
+      - GF_SMTP_USER=osman85@gmail.com
+      - GF_SMTP_PASSWORD=mypassword
+      - GF_SMTP_FROM_ADDRESS=myaddress@gmail.com
+    networks:
+      - osnet
+    ports:
+      - 3000:3000
+  message-broker:
+    container_name: rabbitmq
+    image: rabbitmq:3.9-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    networks:
+      - osnet
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+  blackbox:
+    image: prom/blackbox-exporter:v0.16.0
+    container_name: blackbox
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/blackbox/blackbox.yml"
+    networks:
+      - osnet
+    volumes:
+      - ./monitoring/blackbox/blackbox.yml:/etc/blackbox/blackbox.yml
+    ports:
+    - "9115:9115"
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter
+    ports:
+      - 9187:9187
+    environment:
+      DATA_SOURCE_NAME: "postgresql://postgres:postgres@host.docker.internal:5433/postgres?sslmode=disable"
+    networks:
+      - osnet
+networks:
+  osnet:
+    external: true

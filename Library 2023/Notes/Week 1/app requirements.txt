@@ -1,0 +1,23 @@
+Application functional requirements
+
+1. User authentification as login
+	Create new users 
+	Edit user
+2. CRUD Authors 
+	CRUD- create, read, update and delete
+	Attach author's picture
+3. CRUD books
+	Attach authors to it 
+	Attach book cover
+4. Dashboard for search and start user journey
+5. Have comments under each Book with rating on it
+	Should be able to edit your comments only
+
+
+
+
+Non functional requirements 
+	Observability on availability
+	Simple application metrics and readings
+	Dockerfile for each API and web service 
+

@@ -1,0 +1,9 @@
+#find port(5001) in use macos
+sudo lsof -i -P | grep LISTEN | grep :5001
+kill -9 <pid>
+
+#mysql image documentation
+https://hub.docker.com/_/mysql
+
+#intellij idea
+https://www.jetbrains.com/idea/download

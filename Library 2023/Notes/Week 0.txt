@@ -1,0 +1,33 @@
+As classroom activity we will build multi API library app. Which will have:
+	- React Front End 
+		- We will use ready to use design elements from https://adminlte.io/themes/v3/
+	- Authorization API written in .net core and mongodb as database
+	- Books API for keeping books records written on node.js and postgresql as database
+	- Document API for storing pictures and other document types written in Python FastAPI and postgresql as database
+	- Comments API for storing comments for books written in JAVA with mysql database
+	- GoLang for storing book's ratings and postgresql as database
+	- For E2E application testing we will use gauge with taiko tests
+
+We will use docker and docker-compose for running our application locally and grafana for observability and metrics.
+We will use VS Code for most of the tech stack and Jetbrains IDEA Community Edition for JAVA application development. 
+You can pick IDE of choise for each language.
+
+Architecture of application
+	https://lucid.app/lucidchart/191d5acb-a9bd-4c98-a2c3-b627e2f7db5b/edit?view_items=0QnRaEpWVbi7&invitationId=inv_33e6a0cf-e610-4f91-8438-cfc532a01df1
+
+
+Usefull sources of info:
+	//Vertical vs horizontal scaling
+	https://www.section.io/blog/scaling-horizontally-vs-vertically/
+	https://hub.docker.com/_/mongo
+	https://docs.docker.com/compose/
+	https://prometheus.io/docs/visualization/grafana/
+	https://grafana.com/
+	https://docs.docker.com/compose/networking/
+
+Application Monitoring:
+	https://hevodata.com/learn/prometheus-mongodb-metrics/
+	https://dale-bingham-soteriasoftware.medium.com/net-core-web-api-metrics-with-prometheus-and-grafana-fe84a52d9843
+
+
+

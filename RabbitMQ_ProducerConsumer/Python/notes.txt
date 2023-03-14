@@ -1,0 +1,4 @@
+VS tasks python create env -> venv -> select python version
+
+python -m pip install pika --upgrade
+

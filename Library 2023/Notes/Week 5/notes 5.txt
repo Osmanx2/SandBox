@@ -1,0 +1,22 @@
+For each type of the programming language there are VS CODE extension
+https://marketplace.visualstudio.com/items?itemName=golang.Go&ssr=false#review-details
+
+Screenshots included in the folder
+
+
+
+!!!!! Create database first in the API databases which will match to your preferred name of the DB, then change it in .vscode->launch.json->"env": "PGDATABASE" settings. !!!!
+!!!!! Each API have defined SQL query which needs to be run in the DATABASE before connecting API to the DB!!!!!!
+For ezample Ratings API will need below to be run in ratings-api-db:
+CREATE EXTENSION pgcrypto;
+
+CREATE TABLE public.ratings (
+	id varchar(40) NOT NULL DEFAULT gen_random_uuid(),
+	date_created timestamp NOT NULL DEFAULT now(),
+	created_by varchar(128) NOT NULL,
+	book_id varchar(40) NOT NULL,
+	value int not null, 
+	CONSTRAINT ratings_pkey PRIMARY KEY (id)
+); 
+
+In order to execute CreateRating POST request.

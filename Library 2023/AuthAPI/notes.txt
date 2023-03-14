@@ -1,0 +1,16 @@
+Auth API will be .net core web api
+
+
+For generating new project from template ie .net core mvc project guide below
+https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new
+
+
+Guide
+https://github.com/cornflourblue/dotnet-5-jwt-authentication-api
+
+Setup grafana dashboards:
+https://dale-bingham-soteriasoftware.medium.com/net-core-web-api-metrics-with-prometheus-and-grafana-fe84a52d9843
+
+
+Once run:
+Go to http://localhost:5000/index.html

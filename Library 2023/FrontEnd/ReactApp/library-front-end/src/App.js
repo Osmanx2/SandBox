@@ -6,8 +6,9 @@ import './assets/css/adminlte.css';
 import Layout from "./components/Layout/Layout";
 import DashboardPage from "./pages/DashboardPage";
 import AuthPage from "./pages/AuthPage";
-import ProfilePage from "./pages/ProfilePage";
+import RegisterPage from "./pages/RegisterPage";
 import AuthorsPage from "./pages/AuthorsPage";
+import BookDeatilsPage from "./pages/BookDetailsPage";
 
 require('dotenv').config()
 
@@ -32,10 +33,11 @@ function App() {
       <Layout>
         <Routes>
           <Route path='/login' element={<AuthPage/>}/>
+          <Route exact path='/register' element={<RegisterPage/>} />
           <Route exact path='/' element={<RequireAuth><DashboardPage/></RequireAuth>}/>
-          <Route exact path='/profile' element={<RequireAuth><ProfilePage/></RequireAuth>} />
+          <Route exact path='/profile' element={<RequireAuth><RegisterPage/></RequireAuth>} />
           <Route exact path='/authors' element={<RequireAuth><AuthorsPage/></RequireAuth>} />
-          <Route exact path='/books' element={<RequireAuth><ProfilePage/></RequireAuth>} />
+          <Route exact path='/books' element={<RequireAuth><BookDeatilsPage/></RequireAuth>} />
           <Route path='/dashboard' element={<RequireAuth><DashboardPage/></RequireAuth>}/>
           <Route path='*' element={<RequireAuth><DashboardPage/></RequireAuth>}/>
         </Routes>

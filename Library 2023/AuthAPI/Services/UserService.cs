@@ -15,6 +15,7 @@ namespace WebApi.Services
     {
         AuthenticateResponse Authenticate(AuthenticateRequest model);
         IEnumerable<User> GetAll();
+        User GetByUserName(string userName);
         User GetById(string id);
         User Create(User user);
         string VerifyToken(string token);
@@ -54,6 +55,11 @@ namespace WebApi.Services
         public IEnumerable<User> GetAll()
         {
             return _users.Find(_=>true).ToEnumerable();
+        }
+
+        public User GetByUserName(string userName)
+        {
+            return _users.Find(x => x.UserName == userName).FirstOrDefault();
         }
 
         public User GetById(string id)

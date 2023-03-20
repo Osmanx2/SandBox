@@ -1,0 +1,11 @@
+Create Register Page
+
+1. Copy login page and add some validations
+	1. Will need to validate if password is long enough and pass all the regex validations.
+	2. We need to be sure there is no another user already in the system with same user name. 
+	3. Recaptcha for security reasons (https://www.google.com/recaptcha/about/), im not a robot button etc
+
+
+
+5 ways to call API from react 
+https://dev.to/adyasha8105/how-to-manage-api-calls-in-react-11a8

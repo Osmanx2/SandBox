@@ -2,8 +2,8 @@
 import React from 'react';
 
 
-const ProfilePage = () => {
+const BookDetailsPage = () => {
   return <p>This is book details page.</p>;
 };
 
-export default ProfilePage;
+export default BookDetailsPage;

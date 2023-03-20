@@ -40,8 +40,14 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Create(User user)
         {
-            // OO: Add business logic for check if user exists
             // OO: Encrypt the password
+            var existingUser = _userService.GetByUserName(user.UserName);
+
+            if ( existingUser is not null)
+            {
+                return Conflict(new { message = "User with same username already exists!" });
+            }
+
             var users = _userService.Create(user);
 
             return Ok(users);

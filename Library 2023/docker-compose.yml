@@ -110,5 +110,24 @@ services:
       - library
     ports:
       - 5004:5004
+  documents-api:
+    image: documentsapi
+    container_name: documents-api
+    build:
+      context: ./DocumentsAPI
+      dockerfile: Dockerfile
+    depends_on:
+      - documents-api-db
+    environment:
+      - PGHOST=documents-api-db
+      - PGDATABASE=files
+      - PGPORT=5432
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+      - env_name=Docker
+    networks:
+      - library
+    ports:
+      - 8000:80
 networks:
   library: null

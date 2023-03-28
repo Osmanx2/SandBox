@@ -1,10 +1,9 @@
 import React, {useRef, useContext, useState} from "react";
 import { useNavigate  } from 'react-router-dom';
-import { postRequest } from "../../utils/api-requests"
+import { postRequest, simpleGetRequest } from "../../utils/api-requests"
 import AuthContext from '../../store/auth-context';
 import getBase64 from "../../utils/file";
 import FileUploader from "../Files/FileUploader";
-import { simpleGetRequest }  from "../../utils/api-requests";
 
 const AuthorsForm = () => {
   const nameRef = useRef();
@@ -158,7 +157,7 @@ const AuthorsForm = () => {
                         />
                       </div>
                     </div>
-                    { healtyAPI ? <FileUploader onFileSelectSuccess={(file) => setSelectedFile(file)} onFileSelectError={({ error }) => alert(error)}/> : <p>Document upload is not awailable....</p> }
+                    { healtyAPI ? <FileUploader  uploaderTitle="Avatar" onFileSelectSuccess={(file) => setSelectedFile(file)} onFileSelectError={({ error }) => alert(error)}/> : <p>Document upload is not available....</p> }
                   </div>
 
                   <div className="card-footer">

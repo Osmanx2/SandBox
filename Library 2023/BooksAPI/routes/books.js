@@ -7,17 +7,22 @@ const router = new Router()
 // export our router to be mounted by the parent application
 module.exports = router
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params
-  const { rows } = await db.query('SELECT * FROM public.books', [id])
-  res.send(rows[0])
+  const { rows } = await db.query('SELECT * FROM public.books where id = $1',[id])
+  res.send(rows)
+})
+
+router.get('/', async (req, res) => {
+  const { rows } = await db.query('SELECT * FROM public.books')
+  res.send(rows)
 })
 
 router.post('/', async (req, res) => {
-  const { name, date_of_birth, middle_name, surname, avatar, avatar_filename } = req.body
+  const { date_published, title, description, cost } = req.body
 
   user_id = auth(req)
-  await db.pool.query("INSERT INTO public.authors (id, created_date, created_by, date_of_birth, name, middle_name, surname) VALUES( gen_random_uuid(), now(), $1, $2, $3, $4, $5) returning id", [user_id, date_of_birth, name, middle_name, surname ], (err, qres) => {
+  await db.pool.query("INSERT INTO public.books (id, created_date, created_by, date_of_birth, name, middle_name, surname) VALUES( gen_random_uuid(), now(), $1, $2, $3, $4, $5) returning id", [user_id, date_of_birth, name, middle_name, surname ], (err, qres) => {
     if (err) {
       console.log(err.stack)
       res.send("Something went wrong!!!")

@@ -1,0 +1,6 @@
+Assignment: 
+Your assignment is movie database app similar to IMDB it is explained in module book. Application should have user registration screen, 
+screen to add new movies to the database, add comments to movies and reviews. 
+If should have at least 1 front end app similar to react or other vue.js, angular and 1 separate API. 
+You should have detailed !!!!!documentation!!!!!!, ie screenshots from the application, source code included as appendix. Functionalities listing, architectural diagrams if any, 
+ERD diagram (database schema) models (this is must) with all relations between tables. Example included. 

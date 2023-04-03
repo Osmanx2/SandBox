@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
       res.send("Something went wrong!!!")
     } else {
       res.send(JSON.stringify(qres.rows[0].id))
+      
     }
   })
 })

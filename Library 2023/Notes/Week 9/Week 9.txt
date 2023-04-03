@@ -1,0 +1,16 @@
+https://www.rabbitmq.com/dotnet-api-guide.html
+
+
+We will implement async communication between apis. 
+
+docker-compose -f docker-compose.message-broker.yml up -d
+
+To check rabbitmq UI go to http://localhost:15672
+User:user 
+Password:password
+
+
+
+
+
+

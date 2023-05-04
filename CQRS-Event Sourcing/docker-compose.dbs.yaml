@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo:4.4
+    container_name: mongodb
+    volumes:
+      - /Users/oosman/Desktop/Docker/mongo-cqrs:/data/db
+    networks:
+      - cqrs
+    ports:
+      - 27017:27017
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=massive2023
+      - MSSQL_PID=Express
+    volumes:
+      - /Users/oosman/Desktop/Docker/sqlserver:/data/db
+    networks:
+      - cqrs
+    ports:
+      - 1433:1433
+networks:
+  cqrs:
+    external: true

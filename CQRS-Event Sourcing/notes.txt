@@ -1,0 +1,3 @@
+docker network create -d bridge cqrs
+
+Created project structure and add refferences to solution

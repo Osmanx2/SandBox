@@ -18,7 +18,8 @@
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
-                "ASPNETCORE_URLS": "http://localhost:5010"
+                "ASPNETCORE_URLS": "http://localhost:5010",
+                "KAFKA_TOPIC": "SocialMediaPostEvents"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
@@ -40,8 +41,9 @@
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development",
-                "ASPNETCORE_URLS": "http://localhost:5011"
+                "ASPNETCORE_ENVIRONMENT": "Development.PostgreSQL",
+                "ASPNETCORE_URLS": "http://localhost:5011",
+                "KAFKA_TOPIC": "SocialMediaPostEvents"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

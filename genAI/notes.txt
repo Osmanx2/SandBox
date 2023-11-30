@@ -1,0 +1,5 @@
+Link to repository:
+https://github.com/karpathy/nanoGPT
+
+Author: https://karpathy.ai/
+

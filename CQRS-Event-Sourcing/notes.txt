@@ -1,3 +1,6 @@
 docker network create -d bridge cqrs
 
 Created project structure and add refferences to solution
+
+Swagger 
+http://localhost:5010/swagger/index.html
